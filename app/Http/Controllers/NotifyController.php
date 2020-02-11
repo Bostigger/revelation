@@ -13,8 +13,8 @@ class NotifyController extends Controller
         $kt_residents = KtResident::all(['name','code','contact_no'])->sortBy('name');
         //dd($kt_residents);
         foreach ($kt_residents as $kt_resident) {
-            //if($kt_resident->contact_no) {
-                $message = 'KT Awards night comes off on Saturday, 7th March, 2020. You are entreated to join the award nomination exercise by using the access code ' . $kt_resident->code . ' to nominate members for the various categories.\nThank you.';
+            if($kt_resident->contact_no) {
+                $message = 'KT Awards night comes off on Saturday, 7th March, 2020. You are entreated to join the award nomination exercise by using the access code ' . $kt_resident->code . ' to nominate members for the various categories.Thank you.';
                 $url = 'https://smartsmsgh.com/api/send';
                 $tokenUsername = 'contact';
                 $tokenPassword = 'adimcoam';
@@ -22,7 +22,7 @@ class NotifyController extends Controller
                 $params = '?tokenUsername=' . $tokenUsername;
                 $params .= '&tokenPassword=' . $tokenPassword;
                 $params .= '&to=' . urlencode($phoneNumber);
-                $params .= '&from=' . urlencode('Orokodo');
+                $params .= '&from=' . urlencode('KTH-JCR');
                 $params .= '&content=' . urlencode($message);
                 // Send through Curl
                 $ch = curl_init();
@@ -39,7 +39,7 @@ class NotifyController extends Controller
                 echo "Message sent to " . $kt_resident->contact_no . ' ' . $result . '\n';
                 curl_close($ch);
                 break;
-            //}
+            }
         }
         /*
         */
