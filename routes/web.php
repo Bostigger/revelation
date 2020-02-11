@@ -24,4 +24,5 @@ Route::get('logout', 'AuthController@logout');
 Route::get('nominate', 'NominationController@index');
 Route::post('nomination/nominate', 'NominationController@nominate');
 Route::get('vote', 'VotingController@index');
+Route::get('notify/sendcodes', 'NotifyController@sendCodes');
 Route::post('voting/vote', 'VotingController@vote');
