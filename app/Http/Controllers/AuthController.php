@@ -81,10 +81,21 @@ class AuthController extends Controller
             $category_name = Category::findOrFail($category_id)->name;
             $categories = Category::all(['id', 'name'])->sortBy('name');
 
-            if ($category_id==11 || $category_id==16) {
+            if ($category_id==11) {
                 $nominees = DB::table('nominations')
                     ->join('kt_residents', 'kt_residents.id', '=', 'nominations.nominee_id')
-                    ->select('nominee_id', 'nominee2_id','kt_residents.name as student_name','room','course_year', DB::raw('count(*) as total_votes'))
+                    ->join('kt_residents as kt', 'kt.id', '=', 'nominations.nominee2_id')
+                    ->select('nominee_id', 'nominee2_id',DB::raw('CONCAT(kt_residents.name," & ",kt.name) as student_name'),'kt.room',DB::raw('CONCAT(kt.course_year," & ",kt_residents.course_year) as course_year'), DB::raw('count(*) as total_votes'))
+                    ->where('category_id',$category_id)
+                    ->groupBy('nominee_id','nominee2_id')
+                    ->orderByDesc('total_votes')
+                    ->get();
+            }
+            elseif ($category_id==16) {
+                $nominees = DB::table('nominations')
+                    ->join('kt_residents', 'kt_residents.id', '=', 'nominations.nominee_id')
+                    ->join('kt_residents as kt', 'kt.id', '=', 'nominations.nominee2_id')
+                    ->select('nominee_id', 'nominee2_id',DB::raw('CONCAT(kt_residents.name," & ",kt.name) as student_name'),DB::raw('CONCAT(kt.room," & ",kt_residents.room) as room'),DB::raw('CONCAT(kt.course_year," & ",kt_residents.course_year) as course_year'), DB::raw('count(*) as total_votes'))
                     ->where('category_id',$category_id)
                     ->groupBy('nominee_id','nominee2_id')
                     ->orderByDesc('total_votes')
