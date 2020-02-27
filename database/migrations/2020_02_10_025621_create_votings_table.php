@@ -18,7 +18,7 @@ class CreateVotingsTable extends Migration
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('nominee_id');
-            $table->foreign('nominee_id')->references('id')->on('kt_residents')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('nominee_id')->references('id')->on('nominees')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('kt_resident_id');
             $table->foreign('kt_resident_id')->references('id')->on('kt_residents')->onDelete('cascade')->onUpdate('cascade');
             $table->unique(['category_id','kt_resident_id']);

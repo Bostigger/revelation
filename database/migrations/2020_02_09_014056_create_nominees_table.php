@@ -15,9 +15,10 @@ class CreateNomineesTable extends Migration
     {
         Schema::create('nominees', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedSmallInteger('nominee_id');
-            $table->unsignedSmallInteger('category_id');
-            $table->unsignedSmallInteger('votes');
+            $table->string('name');
+            $table->string('picture')->nullable();
+            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('votes')->default(0);
             $table->foreign('category_id')->references('id')->on('categories')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
