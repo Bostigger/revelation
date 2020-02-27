@@ -11,9 +11,6 @@
 |
 */
 
-//Route::get('/', function () {
-  //  return view('welcome');
-//});
 Route::get('login', 'AuthController@index');
 Route::post('post-login', 'AuthController@postLogin');
 Route::get('registration', 'AuthController@registration');
@@ -24,5 +21,11 @@ Route::get('logout', 'AuthController@logout');
 Route::get('nominate', 'NominationController@index');
 Route::post('nomination/nominate', 'NominationController@nominate');
 Route::get('vote', 'VotingController@index');
+Route::get('vote/category/{category_id}', 'VotingController@byCategory');
 Route::get('notify/sendcodes', 'NotifyController@sendCodes');
 Route::post('voting/vote', 'VotingController@vote');
+Route::post('voting/login', 'VotingController@login');
+Route::post('vote/login', 'VotingController@login');
+Route::get('voting/logout', 'VotingController@logout');
+Route::get('vote/logout', 'VotingController@logout');
+

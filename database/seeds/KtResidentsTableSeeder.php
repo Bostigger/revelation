@@ -26,7 +26,7 @@ class KtResidentsTableSeeder extends Seeder
             DB::commit();
         }
         catch (Exception $e) {
-            Throw($e);
+            DB::rollBack();
         }
 
     }
