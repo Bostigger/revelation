@@ -39,6 +39,8 @@ class VotingController extends Controller
         $nominees = Nominee::query()->where('category_id',$category_id)->get();
         //dd($nominees);
         return view('voting', [
+            'imagePath'=>public_path().'/images/nominees/'.strtoupper($category->name),
+            'imageUrl'=>url('images/nominees/'.strtoupper($category->name)),
             'category'=>$category,
             'nominees'=>$nominees
         ]);
