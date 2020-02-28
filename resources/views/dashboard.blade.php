@@ -130,6 +130,22 @@
                                     @endforeach
 
                                     </tbody>
+                                @elseif($route_name == 'auth.voting.view')
+                                    <thead>
+                                    <tr>
+                                        <th>s/n</th>
+                                        <th>Name</th>
+                                        <th>Votes</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($nominees as $key=>$nominee)
+                                        <tr>
+                                            <td>{{$key+1}}</td>
+                                            <td>{{$nominee->student_name}}</td>
+                                            <td>{{$nominee->votes}}</td>
+                                        </tr>
+                                    @endforeach
                                 @endif
                             </table>
                         </div>

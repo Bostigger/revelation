@@ -120,6 +120,28 @@ class AuthController extends Controller
         return Redirect::to('login')->withSuccess('Opps! You do not have access');
     }
 
+    public function voting($category_id)
+    {
+
+        if(Auth::check()){
+            $routeName = Route::currentRouteName();
+            $category_name = Category::findOrFail($category_id)->name;
+            $categories = Category::all(['id', 'name'])->sortBy('name');
+            $nominees = DB::table('nominees')
+                ->select('id as nominee_id', 'name as student_name', 'votes')
+                ->where('category_id', $category_id)
+                ->orderByDesc('votes')
+                ->get();
+            return view('dashboard',[
+                'categories'=>$categories,
+                'nominees'=>$nominees,
+                'route_name'=>$routeName,
+                'page_title'=>'Votes | '.($category_name??null)
+            ]);
+        }
+        return Redirect::to('login')->withSuccess('Opps! You do not have access');
+    }
+
     public function create(array $data)
     {
         return User::create([
