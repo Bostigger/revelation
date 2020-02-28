@@ -55,6 +55,11 @@
                         {{ session()->get('success') ?? '' }}
                     </div>
                 @endif
+                @if (session()->has('error'))
+                    <div class="alert alert-danger">
+                        {{ session()->get('error') ?? '' }}.
+                    </div>
+                @endif
 
                 @if(!\Illuminate\Support\Facades\Session::has('kth_id'))
                     <span class="d-block text-center text-black m-b-30">Enter your access code to login</span>
@@ -87,15 +92,13 @@
                                     @endif
                                     <a href="{{url('vote/category/'.$category->id)}}" style="font-size: 17px">
                                         {{ $category->name }}
-                                        @if($category->nominee_id)
-                                            &nbsp;-&nbsp;{{ $category->nominee_name }}
-                                        @endif
                                     </a>
                                 </li>
                             @endforeach
                         </ol>
 
                     </div>
+                    <a href="{{ url('vote/logout') }}"><i class="fa fa-lock"></i> Logout</a>
                 @endif
 
             </form>
