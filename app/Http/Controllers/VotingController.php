@@ -69,7 +69,7 @@ class VotingController extends Controller
     public function vote(Request $request)
     {
         $customMessages = [
-            'category_id.unique_with' => 'You have already voted for a candidtate in this category.',
+            'category_id.unique_with' => 'You have already voted for a candidate in this category.',
             'nominee_id.required'  => 'Please select your preferred candidate',
         ];
         $validator = $request->validate([
