@@ -49,7 +49,7 @@
                             <h3 class="text-center p-b-5">Dr Michael Tetteh Kofi Hall Excellence Awards</h3>
                             @if(date('Y-m-d')>='2020-03-04')
                                 <hr/>
-                                <h4 class="text-danger">Voting has ended. We are not accepting anymore votes.</h4>
+                                <h4 class="text-danger text-center">Voting has ended. We are not accepting anymore votes.</h4>
                             @else
                                 @if(!\Illuminate\Support\Facades\Session::has('kth_id'))
                                     <span class="d-block text-center text-black m-b-30">Enter your access code to login</span>
