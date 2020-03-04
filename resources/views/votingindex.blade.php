@@ -36,71 +36,73 @@
             {{ csrf_field() }}
             <!--<span class="login100-form-title p-b-49">
 					</span>-->
-
                 <div class="text-center p-2">
                     <img src="{{url('img/umat.jpg')}}" alt="" width="100">
                 </div>
                 <h3 class="text-center p-b-5">Dr Michael Tetteh Kofi Hall Excellence Awards</h3>
-                <span class="d-block text-center text-black m-b-30">Select a category to vote</span>
-                <!--
-                <div class="wrap-input100 validate-input m-b-23" data-validate = "Name is required">
-                    <span class="label-input100">Full Name</span>
-                    <input class="input100" type="text" name="name" placeholder="Type your name">
-                    <span class="focus-input100" data-symbol="&#xf206;"></span>
-                </div>
-                -->
-
-                @if (session()->has('success'))
-                    <div class="alert alert-success">
-                        {{ session()->get('success') ?? '' }}
-                    </div>
-                @endif
-                @if (session()->has('error'))
-                    <div class="alert alert-danger">
-                        {{ session()->get('error') ?? '' }}.
-                    </div>
-                @endif
-
-                @if(!\Illuminate\Support\Facades\Session::has('kth_id'))
-                    <span class="d-block text-center text-black m-b-30">Enter your access code to login</span>
-                    <div class="wrap-input100 validate-input m-b-23 @if ($errors->has('code')) {{'alert-validate'}} @endif" data-validate="@if ($errors->has('code')) {{ $errors->first('code') }} @endif">
-                        <span class="label-input100">Access Code</span>
-                        <input class="input100" type="text" value="{{ old('code') }}" name="code" placeholder="Enter your access code">
-                        <span class="focus-input100" data-symbol="&#xf190;"></span>
-                    </div>
-                    <div class="container-login100-form-btn">
-                        <div class="wrap-login100-form-btn">
-                            <div class="login100-form-bgbtn"></div>
-                            <button class="login100-form-btn">
-                                @if(!\Illuminate\Support\Facades\Session::has('kth_id'))
-                                    Login
-                                @endif
-                            </button>
-                        </div>
-                    </div>
+                @if(date('Y-m-d')>='2020-03-04')
+                    <h4 class="text-danger">Voting has ended. We are not accepting anymore votes.</h4>
                 @else
-
-                    <div class="wrap-input100 validate-input m-b-23 @if ($errors->has('category_id')) {{'alert-validate'}} @endif" data-validate="@if ($errors->has('category_id')) {{ $errors->first('category') }} @endif">
-                        <ol>
-                            @php ($i = 1)
-                            @foreach($categories as $category)
-                                <li>
-                                    @if($category->nominee_id)
-                                        <span class="badge badge-success" style="min-width: 20px;"><i class="fa fa-check"></i></span>
-                                    @else
-                                        <span class="badge badge-info" style="min-width: 20px;">{{$i++}}</span>
-                                    @endif
-                                    <a href="{{url('vote/category/'.$category->id)}}" style="font-size: 17px">
-                                        {{ $category->name }}
-                                    </a>
-                                </li>
-                            @endforeach
-                        </ol>
-
+                    <span class="d-block text-center text-black m-b-30">Select a category to vote</span>
+                    <!--
+                    <div class="wrap-input100 validate-input m-b-23" data-validate = "Name is required">
+                        <span class="label-input100">Full Name</span>
+                        <input class="input100" type="text" name="name" placeholder="Type your name">
+                        <span class="focus-input100" data-symbol="&#xf206;"></span>
                     </div>
-                    <a href="{{ url('vote/logout') }}"><i class="fa fa-lock"></i> Logout</a>
-                @endif
+                    -->
 
+                    @if (session()->has('success'))
+                        <div class="alert alert-success">
+                            {{ session()->get('success') ?? '' }}
+                        </div>
+                    @endif
+                    @if (session()->has('error'))
+                        <div class="alert alert-danger">
+                            {{ session()->get('error') ?? '' }}.
+                        </div>
+                    @endif
+
+                    @if(!\Illuminate\Support\Facades\Session::has('kth_id'))
+                        <span class="d-block text-center text-black m-b-30">Enter your access code to login</span>
+                        <div class="wrap-input100 validate-input m-b-23 @if ($errors->has('code')) {{'alert-validate'}} @endif" data-validate="@if ($errors->has('code')) {{ $errors->first('code') }} @endif">
+                            <span class="label-input100">Access Code</span>
+                            <input class="input100" type="text" value="{{ old('code') }}" name="code" placeholder="Enter your access code">
+                            <span class="focus-input100" data-symbol="&#xf190;"></span>
+                        </div>
+                        <div class="container-login100-form-btn">
+                            <div class="wrap-login100-form-btn">
+                                <div class="login100-form-bgbtn"></div>
+                                <button class="login100-form-btn">
+                                    @if(!\Illuminate\Support\Facades\Session::has('kth_id'))
+                                        Login
+                                    @endif
+                                </button>
+                            </div>
+                        </div>
+                    @else
+
+                        <div class="wrap-input100 validate-input m-b-23 @if ($errors->has('category_id')) {{'alert-validate'}} @endif" data-validate="@if ($errors->has('category_id')) {{ $errors->first('category') }} @endif">
+                            <ol>
+                                @php ($i = 1)
+                                @foreach($categories as $category)
+                                    <li>
+                                        @if($category->nominee_id)
+                                            <span class="badge badge-success" style="min-width: 20px;"><i class="fa fa-check"></i></span>
+                                        @else
+                                            <span class="badge badge-info" style="min-width: 20px;">{{$i++}}</span>
+                                        @endif
+                                        <a href="{{url('vote/category/'.$category->id)}}" style="font-size: 17px">
+                                            {{ $category->name }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ol>
+
+                        </div>
+                        <a href="{{ url('vote/logout') }}"><i class="fa fa-lock"></i> Logout</a>
+                    @endif
+                @endif
             </form>
         </div>
     </div>
