@@ -71,7 +71,8 @@
                         {{ session()->get('error') ?? '' }}.
                     </div>
                 @endif
-
+                <h3>Voting has ended. We are not accepting anymore votes.</h3>
+                <!--
                 @if(!\Illuminate\Support\Facades\Session::has('kth_id'))
                 <div class="wrap-input100 validate-input m-b-23 @if ($errors->has('code')) {{'alert-validate'}} @endif" data-validate="@if ($errors->has('code')) {{ $errors->first('code') }} @endif">
                     <span class="label-input100">Access Code</span>
@@ -120,6 +121,7 @@
                         </button>
                     </div>
                 </div>
+                -->
             </form>
         </div>
     </div>
