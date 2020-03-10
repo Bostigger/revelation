@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,14 +22,13 @@ Route::get('dashboard/nominations/{category_id}/category_id', 'AuthController@no
 Route::get('dashboard/voting/{category_id}/category_id', 'AuthController@voting')->name('auth.voting.view');
 Route::get('dashboard', 'AuthController@dashboard')->name('auth.dashboard');
 Route::get('logout', 'AuthController@logout');
-Route::get('nominate', 'NominationController@index');
-Route::post('nomination/nominate', 'NominationController@nominate');
-Route::get('vote', 'VotingController@index');
-Route::get('vote/category/{category_id}', 'VotingController@byCategory');
-Route::get('notify/sendcodes', 'NotifyController@sendCodes');
-Route::post('voting/vote', 'VotingController@vote');
-Route::post('voting/login', 'VotingController@login');
-Route::post('vote/login', 'VotingController@login');
-Route::get('voting/logout', 'VotingController@logout');
-Route::get('vote/logout', 'VotingController@logout');
 
+Route::group(['prefix' => 'client'], function () {
+    Route::get('registration', 'ClientController@registration');
+    Route::post('register', 'ClientController@register');
+    Route::get('login', 'ClientController@login')->name('client.login');
+    Route::post('post-login', 'ClientController@postLogin');
+    Route::group(['prefix' => 'dashboard'], function () {
+        Route::get('/', 'ClientController@dashboard');
+    });
+});
