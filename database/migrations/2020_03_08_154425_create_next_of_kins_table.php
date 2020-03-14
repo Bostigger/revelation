@@ -16,10 +16,11 @@ class CreateNextOfKinsTable extends Migration
         Schema::create('next_of_kins', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->uuid('membership_id');
-            $table->unsignedBigInteger('account_id');
             $table->string('first_name');
             $table->string('middle_name')->nullable();
             $table->string('last_name');
+            $table->string('phone_number')->nullable();
+            $table->string('alternate_phone_number')->nullable();
             $table->timestamps();
         });
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Accounts;
 use App\Models\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -9,13 +10,26 @@ use Illuminate\View\View;
 
 class ClientController extends Controller
 {
-    public function dashboard() {
+    public function dashboard($page=null) {
         $this->checkUserSession();
         $client = Client::query()->find(Session::get('client_id'));
         //dd($client);
-        return \view('clientdashboard', [
+        $page = ($page??$_GET['page'])??'index';
+        $pageData = null;
+        $pageView = 'client.dashboard';
+        $pageTitle = 'Dashboard';
+        if ($page !== 'index') {
+            if ($page === 'accounts') {
+                $pageData = Accounts::all()->where('client_id',Session::get('client_client_id'));
+                dd($pageData);
+                $pageView = 'client.account';
+                $pageTitle = 'Accounts';
+            }
+        }
+        return \view($pageView, [
             'client'=> $client,
-            'page_title'=>'Dashboard'
+            'page_title'=>$pageTitle,
+            'page_data'=> $pageData
         ]);
     }
 
@@ -33,12 +47,12 @@ class ClientController extends Controller
 
     public function registration() {
         $this->checkSession();
-        return view('clientregister');
+        return view('client.register');
     }
 
     public function login() {
         $this->checkSession();
-        return view('clientlogin');
+        return view('client.login');
     }
 
     public function register(Request $request) {
@@ -79,5 +93,18 @@ class ClientController extends Controller
             return redirect()->to('client/dashboard')->with('success','Logged in successfully');
         }
         return redirect()->back()->with('error', 'Oops! The access code you entered is incorrect');
+    }
+
+    public function addAccount(Request $request) {
+        $validator = $request->validate([
+            'client_id'=>'bail|required|exists:clients,id',
+            'next_of_kin_id'=>'bail|required|exists:next_of_kins,id',
+            'bank_name'=>'bail|required',
+            'bank_branch'=>'bail|required',
+            'account_name' => 'bail|required',
+            'account_number' => 'bail|required|unique:clients,account_number',
+        ]);
+        Accounts::query()->create($request->all());
+        return redirect()->to('client/accounts')->with('success','Account Added ');
     }
 }

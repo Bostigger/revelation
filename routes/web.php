@@ -29,6 +29,19 @@ Route::group(['prefix' => 'client'], function () {
     Route::get('login', 'ClientController@login')->name('client.login');
     Route::post('post-login', 'ClientController@postLogin');
     Route::group(['prefix' => 'dashboard'], function () {
+        Route::get('/next-of-kins', 'ClientController@nextOfKins');
+        Route::get('/accounts', 'ClientController@accounts');
         Route::get('/', 'ClientController@dashboard');
     });
+
+    Route::group(['prefix' => 'accounts'], function () {
+        Route::post('add','AccountsController@create');
+        Route::put('{account_id}','AccountsController@update');
+        Route::delete('{account_id}','AccountsController@delete');
+        Route::get('/{account_id}','AccountsController@show');
+        Route::get('/','ClientController@dashboard');
+    });
 });
+
+
+

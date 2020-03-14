@@ -1,4 +1,4 @@
-@include('addons.dashboardheader')
+@include('client.addons.dashboardheader')
         <main>
             <div class="container-fluid">
                 <div class="card mb-4">
@@ -24,4 +24,4 @@
                 </div>
             </div>
         </main>
-@include('addons.dashboardfooter')
+@include('client.addons.dashboardfooter')
