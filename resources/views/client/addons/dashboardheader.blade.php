@@ -38,17 +38,17 @@
             <div class="sb-sidenav-menu">
                 <div class="nav">
                     <!--<div class="sb-sidenav-menu-heading">Core</div>-->
-                    <a class="nav-link" href="{{url('dashboard')}}"
+                    <a class="nav-link" href="{{url('client/dashboard')}}"
                     ><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Profile
                     </a>
-                    <a class="nav-link" href="{{url('dashboard')}}"
+                    <a class="nav-link" href="{{url('client/dashboard?page=accounts')}}"
                     ><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-
+                        Accounts
                     </a>
-                    <a class="nav-link" href="{{url('dashboard')}}"
+                    <a class="nav-link" href="{{url('client/dashboard?page=nextofkins')}}"
                     ><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                        Profile
+                        Next Of Kins
                     </a>
                     <!--<div class="sb-sidenav-menu-heading">Interface</div>
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
@@ -65,8 +65,8 @@
                 </div>
             </div>
             <div class="sb-sidenav-footer">
-                <div class="small">Logged in as:</div>
-                {{ ucfirst($client->first_name) }}
+                <div class="small">Membership ID:</div>
+                {{ ucfirst($client->membership_id) }}
             </div>
         </nav>
     </div>

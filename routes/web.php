@@ -41,6 +41,14 @@ Route::group(['prefix' => 'client'], function () {
         Route::get('/{account_id}','AccountsController@show');
         Route::get('/','ClientController@dashboard');
     });
+
+    Route::group(['prefix' => 'nextofkins'], function () {
+        Route::post('add','NextOfKinsController@create');
+        Route::put('{next_of_kins_id}','NextOfKinsController@update');
+        Route::delete('{next_of_kins_id}','NextOfKinsController@delete');
+        Route::get('/{next_of_kins_id}','NextOfKinsController@show');
+        Route::get('/','ClientController@dashboard');
+    });
 });
 
 

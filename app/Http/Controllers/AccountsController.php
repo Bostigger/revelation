@@ -17,7 +17,7 @@ class AccountsController extends Controller
             'account_number' => 'bail|required|unique:clients,account_number',
         ]);
         Accounts::query()->create($request->all());
-        return redirect()->to('client/accounts')->with('success','Account Added ');
+        return redirect()->to('client/dashboard?page=accounts')->with('success','Account Added');
     }
 
     public function show($id) {

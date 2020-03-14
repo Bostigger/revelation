@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Accounts;
 use App\Models\Client;
+use App\Models\NextOfKins;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
@@ -14,16 +15,37 @@ class ClientController extends Controller
         $this->checkUserSession();
         $client = Client::query()->find(Session::get('client_id'));
         //dd($client);
-        $page = ($page??$_GET['page'])??'index';
+        $page = ($page??($_GET['page']??'index'));
         $pageData = null;
         $pageView = 'client.dashboard';
         $pageTitle = 'Dashboard';
         if ($page !== 'index') {
-            if ($page === 'accounts') {
-                $pageData = Accounts::all()->where('client_id',Session::get('client_client_id'));
-                dd($pageData);
+            if (trim($page) === 'accounts') {
+                $pageData = Accounts::all()->where('client_id',Session::get('client_id'));
+                //dd($pageData);
                 $pageView = 'client.account';
                 $pageTitle = 'Accounts';
+            }
+            elseif (trim($page)==='nextofkins') {
+                $pageData = NextOfKins::all()->where('membership_id',Session::get('client_membership_id'));
+                //dd($pageData);
+                $pageView = 'client.nextofkin';
+                $pageTitle = 'New Next Of Kins';
+            }
+            elseif (trim($page)==='newNextOfKin') {
+                $pageData = NextOfKins::all()->where('membership_id',Session::get('client_membership_id'));
+                //dd($pageData);
+                $pageView = 'client.newNextOfKin';
+                $pageTitle = 'New Next Of Kin';
+            }
+            elseif (trim($page)==='newAccount') {
+                $pageData = NextOfKins::all()->where('client_id',Session::get('client_id'));
+                //dd($pageData);
+                $pageView = 'client.newAccount';
+                $pageTitle = 'New Bank Account';
+            }
+            else {
+
             }
         }
         return \view($pageView, [
@@ -67,6 +89,7 @@ class ClientController extends Controller
         $client = new Client;
         $client->email = $request->input('email');
         $client->phone_number = $request->input('phone_number');
+        $client->last_login_date = date('Y-m-d H:i:s');
         $client->password = $request->input('password');
         do {
             try {
@@ -89,6 +112,9 @@ class ClientController extends Controller
         if($client->id??null) {
             Session::put('client_id', $client->id??null);
             Session::put('client_membership_id', $client->membership_id??null);
+            $client = Client::query()->find($client->id??null);
+            $client->last_login_date = date('Y-m-d H:i:s');
+            $client->save();
             // Authentication passed...
             return redirect()->to('client/dashboard')->with('success','Logged in successfully');
         }

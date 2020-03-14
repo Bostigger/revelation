@@ -29,6 +29,7 @@ class CreateClientsTable extends Migration
             $table->string('password');
             $table->enum('marital_status', ['SINGLE','MARRIED','DIVORCED','WIDOWED'])->default('SINGLE');
             $table->enum('account_setup_complete',[1,0])->default(0);
+            $table->dateTime('last_login_date')->useCurrent();
             $table->timestamps();
         });
     }

@@ -21,6 +21,6 @@ class NextOfKinsController extends Controller
             'alternate_phone_number' => 'bail|required',
         ]);
         NextOfKins::query()->create($request->all());
-        return redirect()->to('client/nextofkins')->with('success','Next of Kin Added ');
+        return redirect()->to('client/dashboard?page=nextofkins')->with('success','Next of Kin Added ');
     }
 }

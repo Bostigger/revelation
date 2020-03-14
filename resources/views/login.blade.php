@@ -29,6 +29,17 @@
 
                                 {{ csrf_field() }}
 
+                                @if (session()->has('success'))
+                                    <div class="alert alert-success">
+                                        {{ session()->get('success') ?? '' }}
+                                    </div>
+                                @endif
+                                @if (session()->has('error'))
+                                    <div class="alert alert-danger">
+                                        {{ session()->get('error') ?? '' }}.
+                                    </div>
+                                @endif
+
                                 <div class="form-label-group">
                                     <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" >
                                     <label for="inputEmail">Email address</label>
