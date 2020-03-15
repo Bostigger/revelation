@@ -7,7 +7,6 @@ use App\Models\Client;
 use App\Models\NextOfKins;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-use Illuminate\View\View;
 
 class ClientController extends Controller
 {
@@ -15,7 +14,12 @@ class ClientController extends Controller
         $this->checkUserSession();
         $client = Client::query()->find(Session::get('client_id'));
         //dd($client);
-        $page = ($page??($_GET['page']??'index'));
+        if(!$client->account_setup_complete) {
+            $page = 'editprofile';
+        }
+        else {
+            $page = ($page ?? ($_GET['page'] ?? 'index'));
+        }
         $pageData = null;
         $pageView = 'client.dashboard';
         $pageTitle = 'Dashboard';
@@ -39,13 +43,16 @@ class ClientController extends Controller
                 $pageTitle = 'New Next Of Kin';
             }
             elseif (trim($page)==='newAccount') {
-                $pageData = NextOfKins::all()->where('client_id',Session::get('client_id'));
+                $pageData = NextOfKins::all()->where('membership_id',Session::get('client_membership_id'));
                 //dd($pageData);
                 $pageView = 'client.newAccount';
                 $pageTitle = 'New Bank Account';
             }
-            else {
-
+            elseif (trim($page)==='editprofile') {
+                $pageData = NextOfKins::all()->where('membership_id',Session::get('client_membership_id'));
+                //dd($pageData);
+                $pageView = 'client.editprofile';
+                $pageTitle = 'Profile Setup';
             }
         }
         return \view($pageView, [
@@ -55,15 +62,15 @@ class ClientController extends Controller
         ]);
     }
 
-    public function checkSession() {
+    public function checkSession():void {
         if (Session::get('client_id')) {
-            return header('Location:'.url('client/dashboard'));
+            header('Location:'.url('client/dashboard'));
         }
     }
 
-    public function checkUserSession() {
+    public function checkUserSession():void {
         if (!Session::get('client_id')) {
-            return header('Location:'.url('client/login'));
+            header('Location:'.url('client/login'));
         }
     }
 
@@ -98,6 +105,9 @@ class ClientController extends Controller
             }
         } while(Client::query()->where('membership_id','=',$client->membership_id)->first() instanceof Client);
         $client->save();
+        Session::put('client_id', $client->id??null);
+        Session::put('client_membership_id', $client->membership_id??null);
+        return redirect()->to('client/dashboard')->with('success','Logged in successfully');
     }
 
     public function postLogin(Request $request) {

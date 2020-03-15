@@ -14,7 +14,7 @@ class AccountsController extends Controller
             'bank_name'=>'bail|required',
             'bank_branch'=>'bail|required',
             'account_name' => 'bail|required',
-            'account_number' => 'bail|required|unique:clients,account_number',
+            'account_number' => 'bail|required|unique:accounts,account_number',
         ]);
         Accounts::query()->create($request->all());
         return redirect()->to('client/dashboard?page=accounts')->with('success','Account Added');
