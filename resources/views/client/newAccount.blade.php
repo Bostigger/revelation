@@ -42,7 +42,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group mt-4 mb-0"><button type="submit" class="btn btn-primary btn-block">Add Next of Kin</button></div>
+                            <div class="form-group mt-4 mb-0"><button type="submit" class="btn btn-primary btn-block">Add New Account</button></div>
                         </form>
                     </div>
                 </div>

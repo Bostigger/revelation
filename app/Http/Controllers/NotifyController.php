@@ -36,7 +36,8 @@ class NotifyController extends Controller
                 echo $error;
                 exit;
             }
-            echo 'Message sent to ' . $phoneNumber.' with respose: '.$result.'<br/>';
+            echo 'Message sent to '.$phoneNumber.' successfully';
+            //echo 'Message sent to ' . $phoneNumber.' with respose: '.$result.'<br/>';
             curl_close($ch);
         }
         else {
