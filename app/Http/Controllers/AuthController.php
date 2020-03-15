@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Accounts;
 use App\Models\Category;
+use App\Models\Client;
 use App\Models\KtResident;
+use App\Models\NextOfKins;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -60,83 +63,25 @@ class AuthController extends Controller
     {
 
         if(Auth::check()){
-            $routeName = Route::currentRouteName();
-            $categories = Category::all(['id', 'name'])->sortBy('name');
-            $kt_residents = KtResident::all(['id','name','room','room_type','contact_no','course_year','code'])->sortBy('name');
-            return view('dashboard',[
-                'categories'=>$categories,
-                'kt_residents'=>$kt_residents,
-                'route_name'=>$routeName,
-                'page_title'=>'KTH Residents'
-            ]);
-        }
-        return Redirect::to('login')->withSuccess('Opps! You do not have access');
-    }
 
-    public function nomination($category_id)
-    {
+            $pageData = [];
+            $user = User::all();
+            $pageData['nextOfKins'] = NextOfKins::all();
+            $pageData['accounts'] = Accounts::all();
+            $dateTimeToday = date('Y-m-d H:i:s');
+            $pageData['recentLoginsCount'] = 0;
+            //$pageData['inactiveUsersCount'] = Client::all()->where(DB::raw('DATEDIFF(last_login_date, '.$dateTimeToday.')'),'>',1)->count();
+            $pageData['inactiveUsersCount'] = DB::table('clients')->whereRaw('DATEDIFF(CURRENT_TIMESTAMP,last_login_date) >= 7')->get()->count();
+            $pageData['inactiveUsers'] = DB::table('clients')->whereRaw('DATEDIFF(CURRENT_TIMESTAMP,last_login_date) >= 7')->get();
+            $pageData['accounts'] = Accounts::all();
+            $pageData['nextOfKinsCount'] = NextOfKins::all()->count();
+            $pageData['accountsCount'] = Accounts::all()->count();
+            $pageData['clientsCount'] = Client::all()->count();
 
-        if(Auth::check()){
-            $routeName = Route::currentRouteName();
-            $category_name = Category::findOrFail($category_id)->name;
-            $categories = Category::all(['id', 'name'])->sortBy('name');
-
-            if ($category_id==11) {
-                $nominees = DB::table('nominations')
-                    ->join('kt_residents', 'kt_residents.id', '=', 'nominations.nominee_id')
-                    ->join('kt_residents as kt', 'kt.id', '=', 'nominations.nominee2_id')
-                    ->select('nominee_id', 'nominee2_id',DB::raw('CONCAT(kt_residents.name," & ",kt.name) as student_name'),'kt.room',DB::raw('CONCAT(kt.course_year," & ",kt_residents.course_year) as course_year'), DB::raw('count(*) as total_votes'))
-                    ->where('category_id',$category_id)
-                    ->groupBy('nominee_id','nominee2_id')
-                    ->orderByDesc('total_votes')
-                    ->get();
-            }
-            elseif ($category_id==16) {
-                $nominees = DB::table('nominations')
-                    ->join('kt_residents', 'kt_residents.id', '=', 'nominations.nominee_id')
-                    ->join('kt_residents as kt', 'kt.id', '=', 'nominations.nominee2_id')
-                    ->select('nominee_id', 'nominee2_id',DB::raw('CONCAT(kt_residents.name," & ",kt.name) as student_name'),DB::raw('CONCAT(kt.room," & ",kt_residents.room) as room'),DB::raw('CONCAT(kt.course_year," & ",kt_residents.course_year) as course_year'), DB::raw('count(*) as total_votes'))
-                    ->where('category_id',$category_id)
-                    ->groupBy('nominee_id','nominee2_id')
-                    ->orderByDesc('total_votes')
-                    ->get();
-            }
-            else {
-                $nominees = DB::table('nominations')
-                    ->join('kt_residents', 'kt_residents.id', '=', 'nominations.nominee_id')
-                    ->select('nominee_id', 'kt_residents.name as student_name', 'room', 'course_year', DB::raw('count(*) as total_votes'))
-                    ->where('category_id', $category_id)
-                    ->groupBy('nominee_id')
-                    ->orderByDesc('total_votes')
-                    ->get();
-            }
-            return view('dashboard',[
-                'categories'=>$categories,
-                'nominees'=>$nominees,
-                'route_name'=>$routeName,
-                'page_title'=>'Nominations | '.($category_name??null)
-            ]);
-        }
-        return Redirect::to('login')->withSuccess('Opps! You do not have access');
-    }
-
-    public function voting($category_id)
-    {
-
-        if(Auth::check()){
-            $routeName = Route::currentRouteName();
-            $category_name = Category::findOrFail($category_id)->name;
-            $categories = Category::all(['id', 'name'])->sortBy('name');
-            $nominees = DB::table('nominees')
-                ->select('id as nominee_id', 'name as student_name', 'votes')
-                ->where('category_id', $category_id)
-                ->orderByDesc('votes')
-                ->get();
-            return view('dashboard',[
-                'categories'=>$categories,
-                'nominees'=>$nominees,
-                'route_name'=>$routeName,
-                'page_title'=>'Votes | '.($category_name??null)
+            return \view('dashboard', [
+                'user'=> $user,
+                'page_title'=>'Admin Dashboard',
+                'page_data'=> $pageData
             ]);
         }
         return Redirect::to('login')->withSuccess('Opps! You do not have access');

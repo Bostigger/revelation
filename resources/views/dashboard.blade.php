@@ -129,7 +129,7 @@
                                         <h6 class="mb-4">Rgistered Users</h6>
                                         <div class="row d-flex align-items-center">
                                             <div class="col-9">
-                                                <h3 class="f-w-300 d-flex align-items-center m-b-0"><i class="feather icon-users text-c-green f-30 m-r-10"></i>10</h3>
+                                                <h3 class="f-w-300 d-flex align-items-center m-b-0"><i class="feather icon-users text-c-green f-30 m-r-10"></i>{{ $page_data['clientsCount']??0 }}</h3>
                                             </div>
 
 
@@ -148,7 +148,7 @@
                                         <h6 class="mb-4">Recent Logins</h6>
                                         <div class="row d-flex align-items-center">
                                             <div class="col-9">
-                                                <h3 class="f-w-300 d-flex align-items-center  m-b-0"><i class="feather icon-users text-c-red f-30 m-r-10"></i>6</h3>
+                                                <h3 class="f-w-300 d-flex align-items-center  m-b-0"><i class="feather icon-users text-c-red f-30 m-r-10"></i>{{ $page_data['recentLoginsCount']??0 }}</h3>
                                             </div>
 
                                         </div>
@@ -166,7 +166,7 @@
                                         <h6 class="mb-4">Inactive Logins</h6>
                                         <div class="row d-flex align-items-center">
                                             <div class="col-9">
-                                                <h3 class="f-w-300 d-flex align-items-center  m-b-0"><i class="feather icon-users text-c-green f-30 m-r-10"></i>4</h3>
+                                                <h3 class="f-w-300 d-flex align-items-center  m-b-0"><i class="feather icon-users text-c-green f-30 m-r-10"></i>{{ $page_data['inactiveUsersCount']??0 }}</h3>
                                             </div>
 
                                         </div>
@@ -187,61 +187,28 @@
                                         <div class="table-responsive">
                                             <table class="table table-hover">
                                                 <tbody>
-                                                <tr class="unread">
-                                                    <td><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-1.jpg" alt="activity-user"></td>
-                                                    <td>
-                                                        <h6 class="mb-1">Isabella Christensen</h6>
-                                                        <p class="m-0">Lorem Ipsum is simply…</p>
-                                                    </td>
-                                                    <td>
-                                                        <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i>11 MAY 12:56</h6>
-                                                    </td>
-                                                    <td><a href="#!" class="label theme-bg2 text-white f-12">Send message</a><a href="#!" class="label theme-bg text-white f-12">Send Email</a><a href="#!" class="label theme-bg3 text-white f-12">Call Phone</a></td>
-                                                </tr>
-                                                <tr class="unread">
-                                                    <td><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-2.jpg" alt="activity-user"></td>
-                                                    <td>
-                                                        <h6 class="mb-1">Mathilde Andersen</h6>
-                                                        <p class="m-0">Lorem Ipsum is simply text of…</p>
-                                                    </td>
-                                                    <td>
-                                                        <h6 class="text-muted"><i class="fas fa-circle text-c-red f-10 m-r-15"></i>11 MAY 10:35</h6>
-                                                    </td>
-                                                    <td><a href="#!" class="label theme-bg2 text-white f-12">Send message</a><a href="#!" class="label theme-bg text-white f-12">Send Email</a><a href="#!" class="label theme-bg3 text-white f-12">Call Phone</a></td>
-                                                </tr>
-                                                <tr class="unread">
-                                                    <td><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-2.jpg" alt="activity-user"></td>
-                                                    <td>
-                                                        <h6 class="mb-1">Karla Sorensen</h6>
-                                                        <p class="m-0">Lorem Ipsum is simply…</p>
-                                                    </td>
-                                                    <td>
-                                                        <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i>9 MAY 17:38</h6>
-                                                    </td>
-                                                    <td><a href="#!" class="label theme-bg2 text-white f-12">Send message</a><a href="#!" class="label theme-bg text-white f-12">send Email</a><a href="#!" class="label theme-bg3 text-white f-12">Call Phone</a></td>
-                                                </tr>
-                                                <tr class="unread">
-                                                    <td><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-1.jpg" alt="activity-user"></td>
-                                                    <td>
-                                                        <h6 class="mb-1">Ida Jorgensen</h6>
-                                                        <p class="m-0">Lorem Ipsum is simply text of…</p>
-                                                    </td>
-                                                    <td>
-                                                        <h6 class="text-muted f-w-300"><i class="fas fa-circle text-c-red f-10 m-r-15"></i>19 MAY 12:56</h6>
-                                                    </td>
-                                                    <td><a href="#!" class="label theme-bg2 text-white f-12">Send message</a><a href="#!" class="label theme-bg text-white f-12">send Email</a><a href="#!" class="label theme-bg3 text-white f-12">Call Phone</a></td>
-                                                </tr>
-                                                <tr class="unread">
-                                                    <td><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-2.jpg" alt="activity-user"></td>
-                                                    <td>
-                                                        <h6 class="mb-1">Albert Andersen</h6>
-                                                        <p class="m-0">Lorem Ipsum is simply dummy…</p>
-                                                    </td>
-                                                    <td>
-                                                        <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i>21 July 12:56</h6>
-                                                    </td>
-                                                    <td><a href="#!" class="label theme-bg2 text-white f-12">send message</a><a href="#!" class="label theme-bg text-white f-12">send Email</a><a href="#!" class="label theme-bg3 text-white f-12">Call Phone</a></td>
-                                                </tr>
+                                                @if($page_data['inactiveUsersCount'])
+                                                    @foreach($page_data['inactiveUsers'] as $inactiveUsers)
+                                                        <tr class="unread">
+                                                            <td><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-1.jpg" alt="activity-user"></td>
+                                                            <td>
+                                                                <h6 class="mb-1">{{ $inactiveUsers->last_name.' '.$inactiveUsers->first_name.' '.$inactiveUsers->middle_name }}</h6>
+                                                                <p class="m-0">Lorem Ipsum is simply…</p>
+                                                            </td>
+                                                            <td>
+                                                                <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i>11 MAY 12:56</h6>
+                                                            </td>
+                                                            <td><a href="javascript:" aria-number="{{ $inactiveUsers->phone_number }}" class="label sendSms theme-bg2 text-white f-12">Send message</a><a href="mailto:{{ $inactiveUsers->email }}" class="label theme-bg text-white f-12">Send Email</a><a href="tel:{{ $inactiveUsers->phone_number }}" class="label theme-bg3 text-white f-12">Call Phone</a></td>
+                                                        </tr>
+                                                    @endforeach
+                                                @else
+                                                    <tr class="unread">
+                                                        <td>
+                                                            <p class="m-0">No inactive users available</p>
+                                                        </td>
+                                                    </tr>
+                                                @endif
+
                                                 </tbody>
                                             </table>
                                         </div>
@@ -260,7 +227,7 @@
                                             </div>
 
                                         </div>
-                                        <h2 class="mt-3 f-w-300">15<sub class="text-muted f-14">Total Users</sub></h2>
+                                        <h2 class="mt-3 f-w-300">{{ $page_data['clientsCount'] }}<sub class="text-muted f-14">Total Users</sub></h2>
 
                                         <i class="feather icon-users text-c-purple f-50"></i>
                                     </div>
@@ -272,7 +239,7 @@
                                                 <i class="feather icon-users f-30 text-c-green"></i>
                                             </div>
                                             <div class="col">
-                                                <h3 class="f-w-300">8</h3>
+                                                <h3 class="f-w-300">{{ $page_data['clientsCount']-$page_data['inactiveUsersCount'] }}</h3>
                                                 <span class="d-block text-uppercase">Active Members</span>
                                             </div>
                                         </div>
@@ -283,7 +250,7 @@
                                                 <i class="feather icon-users f-30 text-c-blue"></i>
                                             </div>
                                             <div class="col">
-                                                <h3 class="f-w-300">7</h3>
+                                                <h3 class="f-w-300">{{ $page_data['inactiveUsersCount'] }}</h3>
                                                 <span class="d-block text-uppercase">Inactive Members</span>
                                             </div>
                                         </div>
@@ -607,6 +574,20 @@
 <script src="{{ url('assets/js/vendor-all.min.js') }}"></script>
 <script src="{{ url('assets/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
 <script src="{{ url('assets/js/pcoded.min.js') }}"></script>
+<script>
+    $(document).ready(function() {
+        $(document).on('click','.sendSms', function () {
+            sendSms($(this).attr('aria-number'));
+        });
+        function sendSms(phoneNumber) {
+            const message = prompt('Enter the Message you want to send');
 
+            $.get('{{url('notify')}}',{'message':message, 'phone_number':phoneNumber, 'csrf_token':'{{ csrf_token() }}'}, function (res) {
+                alert(res);
+            });
+
+        }
+    })
+</script>
 </body>
 </html>
