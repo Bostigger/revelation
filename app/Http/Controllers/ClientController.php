@@ -6,6 +6,7 @@ use App\Models\Accounts;
 use App\Models\Client;
 use App\Models\NextOfKins;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Validator,Redirect,Response;
 use Illuminate\Support\Facades\Session;
 
@@ -26,7 +27,11 @@ class ClientController extends Controller
         $pageTitle = 'Dashboard';
         if ($page !== 'index') {
             if (trim($page) === 'accounts') {
-                $pageData = Accounts::all()->where('client_id',Session::get('client_id'));
+                $pageData = DB::table('accounts')
+                    ->leftJoin('next_of_kins','next_of_kins.id','=','accounts.next_of_kin_id')
+                    ->select('accounts.*','next_of_kins.first_name as nok_first_name','next_of_kins.last_name as nok_last_name','next_of_kins.middle_name')
+                    ->where('client_id',Session::get('client_id'))
+                    ->get();
                 //dd($pageData);
                 $pageView = 'client.account';
                 $pageTitle = 'Accounts';
@@ -55,6 +60,11 @@ class ClientController extends Controller
                 $pageView = 'client.editprofile';
                 $pageTitle = 'Profile Setup';
             }
+        }
+        else {
+            $pageData = [];
+            $pageData['nextOfKins'] = NextOfKins::all()->where('membership_id',Session::get('client_membership_id'))->count();
+            $pageData['accounts'] = Accounts::all()->where('client_id',Session::get('client_id'))->count();
         }
         return \view($pageView, [
             'client'=> $client,

@@ -13,6 +13,7 @@
                                     <th>Bank Branch</th>
                                     <th>Account Name</th>
                                     <th>Account Nummber</th>
+                                    <th>Next Of Kin</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -23,6 +24,7 @@
                                             <td>{{$data->bank_branch}}</td>
                                             <td>{{$data->account_name}}</td>
                                             <td>{{$data->account_number}}</td>
+                                            <td>{{$data->nok_last_name.' '.$data->nok_first_name}}</td>
                                         </tr>
                                     @endforeach
 
