@@ -1,4 +1,4 @@
-<?php 
+<?php
 use Illuminate\Support\Facades\Session;
 
 /*
@@ -25,6 +25,7 @@ Route::group(['prefix' => 'client'], function () {
     Route::get('registration', 'ClientController@registration');
     Route::post('register', 'ClientController@register');
     Route::get('login', 'ClientController@login')->name('client.login');
+    Route::get('logout', 'ClientController@logout')->name('client.logout');
     Route::post('post-login', 'ClientController@postLogin');
     Route::post('editprofile', 'ClientController@editprofile');
     Route::group(['prefix' => 'dashboard'], function () {

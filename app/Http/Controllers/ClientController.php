@@ -182,4 +182,10 @@ class ClientController extends Controller
         $client->save();
         return redirect()->back()->with('success','Profile updated successfully');
     }
+
+    public function logout() {
+        Session::pull('client_id');
+        Session::pull('client_membership_id');
+        return redirect()->to('client/login')->with('success','Logged out successfully');
+    }
 }
