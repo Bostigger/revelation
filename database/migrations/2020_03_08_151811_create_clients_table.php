@@ -28,6 +28,12 @@ class CreateClientsTable extends Migration
             $table->string('proof_of_account')->nullable();
             $table->string('password');
             $table->string('residential_address')->nullable();
+            $table->string('relative_name')->nullable();
+            $table->string('relation')->nullable();
+            $table->string('relative_phone_number')->nullable();
+            $table->string('relative2_name')->nullable();
+            $table->string('relation2')->nullable();
+            $table->string('relative2_phone_number')->nullable();
             $table->enum('marital_status', ['SINGLE','MARRIED','DIVORCED','WIDOWED'])->default('SINGLE');
             $table->enum('account_setup_complete',[1,0])->default(0);
             $table->dateTime('last_login_date')->useCurrent();

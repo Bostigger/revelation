@@ -6,6 +6,7 @@ use App\Models\Accounts;
 use App\Models\Client;
 use App\Models\NextOfKins;
 use Illuminate\Http\Request;
+use Validator,Redirect,Response;
 use Illuminate\Support\Facades\Session;
 
 class ClientController extends Controller
@@ -62,15 +63,17 @@ class ClientController extends Controller
         ]);
     }
 
-    public function checkSession():void {
+    public function checkSession(){
         if (Session::get('client_id')) {
-            header('Location:'.url('client/dashboard'));
+            //header('Location:'.url('client/dashboard'));
+            return Redirect::to(url('client/dashboard'))->withSuccess('Opps! You do not have access');
         }
     }
 
-    public function checkUserSession():void {
+    public function checkUserSession(){
         if (!Session::get('client_id')) {
-            header('Location:'.url('client/login'));
+            //header('Location:'.url('client/login'));
+            return Redirect::to(url('client/login'))->withSuccess('Opps! You do not have access');
         }
     }
 
@@ -128,7 +131,7 @@ class ClientController extends Controller
             // Authentication passed...
             return redirect()->to('client/dashboard')->with('success','Logged in successfully');
         }
-        return redirect()->back()->with('error', 'Oops! The access code you entered is incorrect');
+        return redirect()->back()->with('error', 'Incorrect login details');
     }
 
     public function addAccount(Request $request) {
@@ -141,6 +144,42 @@ class ClientController extends Controller
             'account_number' => 'bail|required|unique:clients,account_number',
         ]);
         Accounts::query()->create($request->all());
-        return redirect()->to('client/accounts')->with('success','Account Added ');
+        return redirect()->to('client/accounts')->with('success','Account Added');
+    }
+
+    public function editprofile(Request $request) {
+        $validator = $request->validate([
+            'first_name' => 'bail|required',
+            'middle_name' => 'bail|required',
+            'last_name' => 'bail|required',
+            'email'=>'bail|required|email',
+            'phone_number' => 'bail|required|min:10',
+            'alternate_phone_number' => 'bail|required',
+            'marital_status'=>'bail|required|in:SINGLE,MARRIED,WIDOWED,DIVORCED',
+            'residential_address'=>'bail|sometimes|nullable',
+            'occupation'=>'bail|sometimes|nullable',
+            'relative_name'=>'bail|sometimes|nullable',
+            'relative_phone_number'=>'bail|sometimes|nullable',
+            'relation'=>'bail|sometimes|nullable'
+        ]);
+        $client = Client::query()->find(Session::get('client_id'));
+        $client->email = $request->input('email');
+        $client->phone_number = $request->input('phone_number');
+        $client->alternate_phone_number = $request->input('alternate_phone_number');
+        $client->first_name = $request->input('first_name');
+        $client->middle_name = $request->input('middle_name');
+        $client->last_name = $request->input('last_name');
+        $client->marital_status = $request->input('marital_status');
+        $client->residential_address = $request->input('residential_address');
+        $client->occupation = $request->input('occupation');
+        $client->relative_name = $request->input('relative_name');
+        $client->relation = $request->input('relation');
+        $client->relative_phone_number = $request->input('relative_phone_number');
+        $client->relative2_name = $request->input('relative2_name');
+        $client->relation2 = $request->input('relation2');
+        $client->relative2_phone_number = $request->input('relative2_phone_number');
+        $client->account_setup_complete = 1;
+        $client->save();
+        return redirect()->back()->with('success','Profile updated successfully');
     }
 }

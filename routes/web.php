@@ -28,7 +28,7 @@ Route::group(['prefix' => 'client'], function () {
     Route::post('register', 'ClientController@register');
     Route::get('login', 'ClientController@login')->name('client.login');
     Route::post('post-login', 'ClientController@postLogin');
-    Route::post('profile', 'ClientController@profile');
+    Route::post('editprofile', 'ClientController@editprofile');
     Route::group(['prefix' => 'dashboard'], function () {
         Route::get('/next-of-kins', 'ClientController@nextOfKins');
         Route::get('/accounts', 'ClientController@accounts');
