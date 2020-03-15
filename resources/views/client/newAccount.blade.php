@@ -33,7 +33,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="small mb-1" for="inputConfirmPassword">Select Next of Kin</label>
-                                        <select class="form-control py-4" id="inputConfirmPassword" name="next_of_kin_id" type="text">
+                                        <select class="form-control" id="inputConfirmPassword" name="next_of_kin_id" type="text">
                                             <option value="" selected="selected">Select Next of Kin</option>
                                             @foreach($page_data as $nok)
                                                 <option value="{{$nok->id}}">{{$nok->last_name.' '.$nok->first_name.' '.$nok->middle_name}}</option>
