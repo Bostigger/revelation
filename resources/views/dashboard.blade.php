@@ -40,7 +40,7 @@
         <div class="navbar-brand header-logo">
             <a href="index.html" class="b-brand">
                 <div class="b-bg">
-                    <i class="feather icon-trending-up"></i>
+                    <i class=""></i>
                 </div>
                 <span class="b-title">Number 3</span>
             </a>
@@ -77,7 +77,7 @@
         <a class="mobile-menu" id="mobile-collapse1" href="javascript:"><span></span></a>
         <a href="index.html" class="b-brand">
             <div class="b-bg">
-                <i class="feather icon-trending-up"></i>
+                <i class=""></i>
             </div>
             <span class="b-title">NUMBER 3</span>
         </a>

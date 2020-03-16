@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
-    <link rel="icon" type="image/png" href="{{url('img/umat.jpg')}}"/>
+    <link rel="icon" type="image/png" href="{{url('img/umat.png')}}"/>
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="{{url('vendor/bootstrap/css/bootstrap.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{url('vendor/bootstrap/css/bootstrap-image-checkbox.css')}}">
