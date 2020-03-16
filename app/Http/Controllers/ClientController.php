@@ -184,6 +184,7 @@ class ClientController extends Controller
         $client->occupation = $request->input('occupation');
         $client->relative_name = $request->input('relative_name');
         $client->relation = $request->input('relation');
+        $client->dob = $request->input('dob');
         $client->relative_phone_number = $request->input('relative_phone_number');
         $client->relative2_name = $request->input('relative2_name');
         $client->relation2 = $request->input('relation2');

@@ -62,7 +62,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="small mb-1" for="inputResidentialAddress">Residential Address</label>
-                                <textarea class="form-control py-3" id="inputResidentialAddress" name="residetial_address" type="email" aria-describedby="emailHelp" placeholder="Enter Residential address">{{ $client->residential_address??null }}</textarea>
+                                <textarea class="form-control py-3" id="inputResidentialAddress" name="residential_address" type="email" aria-describedby="emailHelp" placeholder="Enter Residential address">{{ $client->residential_address??null }}</textarea>
                             </div>
 
                             <div class="form-row">
