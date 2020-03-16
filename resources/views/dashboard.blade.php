@@ -58,9 +58,9 @@
                 <li data-username="basic components Button Alert Badges breadcrumb Paggination progress Tooltip popovers Carousel Cards Collapse Tabs pills Modal Grid System Typography Extra Shadows Embeds" class="nav-item pcoded-hasmenu">
                     <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">USER Activities</span></a>
                     <ul class="pcoded-submenu">
-                        <li class=""><a href="bc_button.html" class="">Active Login</a></li>
-                        <li class=""><a href="bc_badges.html" class="">Inactive Logins</a></li>
-                        <li class=""><a href="bc_breadcrumb-pagination.html" class="">All Users</a></li>
+                        <li class=""><a href="#" class="">Active Login</a></li>
+                        <li class=""><a href="#" class="">Inactive Users</a></li>
+                        <li class=""><a href="all_users.php" class="">All Users</a></li>
 
                     </ul>
                 </li>
