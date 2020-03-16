@@ -8,7 +8,7 @@
     <meta name="author" content="" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Number 3 |Client Dashboard</title>
-    <link rel="icon" type="image/png" href="{{url('img/umat.jpg')}}"/>
+    <link rel="icon" type="image/png" href="{{url('img/umat.png')}}"/>
     <link href="{{url('css/styles.css')}}" rel="stylesheet" />
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
