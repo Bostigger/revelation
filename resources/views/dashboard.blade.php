@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Revelation Aadmin Dashboard</title>
+    <title>Number 3 | Admin Dashboard</title>
     <!-- HTML5 Shim and Respond.js IE11 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 11]>
@@ -42,7 +42,7 @@
                 <div class="b-bg">
                     <i class="feather icon-trending-up"></i>
                 </div>
-                <span class="b-title">Number #3</span>
+                <span class="b-title">Number 3</span>
             </a>
             <a class="mobile-menu" id="mobile-collapse" href="javascript:"><span></span></a>
         </div>
