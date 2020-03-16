@@ -193,10 +193,10 @@
                                                             <td><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-1.jpg" alt="activity-user"></td>
                                                             <td>
                                                                 <h6 class="mb-1">{{ $inactiveUsers->last_name.' '.$inactiveUsers->first_name.' '.$inactiveUsers->middle_name }}</h6>
-                                                                <p class="m-0">Lorem Ipsum is simply…</p>
+                                                                <p class="m-0">Inactive user</p>
                                                             </td>
                                                             <td>
-                                                                <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i>11 MAY 12:56</h6>
+                                                                <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i>{{$inactiveUsers->last_login_date}}</h6>
                                                             </td>
                                                             <td><a href="javascript:" aria-number="{{ $inactiveUsers->phone_number }}" class="label sendSms theme-bg2 text-white f-12">Send message</a><a href="mailto:{{ $inactiveUsers->email }}" class="label theme-bg text-white f-12">Send Email</a><a href="tel:{{ $inactiveUsers->phone_number }}" class="label theme-bg3 text-white f-12">Call Phone</a></td>
                                                         </tr>
