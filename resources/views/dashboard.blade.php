@@ -176,7 +176,7 @@
                                     </div>
                                 </div>
                             </div>
-                          
+
                             <!--[ year  sales section ] end-->
                             <!--[ Recent Users ] start-->
                             <div class="col-xl-8 col-md-6">
@@ -217,6 +217,43 @@
                                 </div>
                             </div>
                             <!--[ Recent Users ] end-->
+                            <div class="col-xl-8 col-md-6">
+                                <div class="card Recent-Users">
+                                    <div class="card-header">
+                                        <h5>Active Users</h5>
+                                    </div>
+                                    <div class="card-block px-0 py-3">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover">
+                                                <tbody>
+                                                @if($page_data['activeUsersCount'])
+                                                    @foreach($page_data['activeUsers'] as $activeUsers)
+                                                        <tr class="unread">
+                                                            <td><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-1.jpg" alt="activity-user"></td>
+                                                            <td>
+                                                                <h6 class="mb-1">{{ $activeUsers->last_name.' '.$activeUsers->first_name.' '.$activeUsers->middle_name }}</h6>
+                                                                <p class="m-0">Active user</p>
+                                                            </td>
+                                                            <td>
+                                                                <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i>{{$activeUsers->last_login_date}}</h6>
+                                                            </td>
+                                                            <td><a href="javascript:" aria-number="{{ $activeUsers->phone_number }}" class="label sendSms theme-bg2 text-white f-12">Send message</a><a href="mailto:{{ $inactiveUsers->email }}" class="label theme-bg text-white f-12">Send Email</a><a href="tel:{{ $inactiveUsers->phone_number }}" class="label theme-bg3 text-white f-12">Call Phone</a></td>
+                                                        </tr>
+                                                    @endforeach
+                                                @else
+                                                    <tr class="unread">
+                                                        <td>
+                                                            <p class="m-0">No Active users available</p>
+                                                        </td>
+                                                    </tr>
+                                                @endif
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                             <!-- [ statistics year chart ] start -->
                             <div class="col-xl-4 col-md-6">

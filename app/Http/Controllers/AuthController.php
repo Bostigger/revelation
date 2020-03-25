@@ -72,7 +72,9 @@ class AuthController extends Controller
             $pageData['recentLoginsCount'] = 0;
             //$pageData['inactiveUsersCount'] = Client::all()->where(DB::raw('DATEDIFF(last_login_date, '.$dateTimeToday.')'),'>',1)->count();
             $pageData['inactiveUsersCount'] = DB::table('clients')->whereRaw('DATEDIFF(CURRENT_TIMESTAMP,last_login_date) >= 28')->get()->count();
-            $pageData['inactiveUsers'] = DB::table('clients')->whereRaw('DATEDIFF(CURRENT_TIMESTAMP,last_login_date) >= 7')->get();
+            $pageData['activeUsersCount'] = DB::table('clients')->whereRaw('DATEDIFF(CURRENT_TIMESTAMP,last_login_date) < 28')->get()->count();
+            $pageData['activeUsers'] = DB::table('clients')->whereRaw('DATEDIFF(CURRENT_TIMESTAMP,last_login_date) < 28')->get();
+            $pageData['inactiveUsers'] = DB::table('clients')->whereRaw('DATEDIFF(CURRENT_TIMESTAMP,last_login_date) >= 28')->get();
             $pageData['accounts'] = Accounts::all();
             $pageData['nextOfKinsCount'] = NextOfKins::all()->count();
             $pageData['accountsCount'] = Accounts::all()->count();
