@@ -19,6 +19,7 @@ Route::post('post-registration', 'AuthController@postRegistration');
 Route::get('dashboard', 'AuthController@dashboard')->name('auth.dashboard');
 Route::get('logout', 'AuthController@logout');
 Route::get('notify', 'NotifyController@index');
+Route::get('notify/all', 'NotifyController@notifyAll');
 
 Route::group(['prefix' => 'client'], function () {
     Route::get('registration', 'ClientController@registration');
@@ -49,6 +50,3 @@ Route::group(['prefix' => 'client'], function () {
         Route::get('/','ClientController@dashboard');
     });
 });
-
-
-
