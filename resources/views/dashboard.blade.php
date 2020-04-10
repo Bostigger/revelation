@@ -184,13 +184,14 @@
                                     <div class="card-header">
                                         <h5>Inactive Users</h5>
                                     </div>
-                                    <a href="javascript:" aria-number="{{ $inactiveUsers->phone_number }}" class="label sendSmsall theme-bg2 text-white f-12">Send to all</a>
                                     <div class="card-block px-0 py-3">
                                         <div class="table-responsive">
                                             <table class="table table-hover">
                                                 <tbody>
                                                 @if($page_data['inactiveUsersCount'])
                                                     @foreach($page_data['inactiveUsers'] as $inactiveUsers)
+                                                    <a href="javascript:" aria-number="{{ $inactiveUsers->phone_number }}" class="label sendSmsall theme-bg2 text-white f-12">Send to all</a>
+
                                                         <tr class="unread">
                                                             <td><img class="rounded-circle" style="width:40px;" src="assets/images/user/avatar-1.jpg" alt="activity-user"></td>
                                                             <td>
