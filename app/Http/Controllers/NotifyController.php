@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class NotifyController extends Controller
 {
@@ -49,7 +50,7 @@ class NotifyController extends Controller
     public function notifyAll(Request $request){
       $inactiveUsers= DB::table('clients')->whereRaw('DATEDIFF(CURRENT_TIMESTAMP,last_login_date) >= 28')->get();
       foreach($inactiveUsers as $user){
-        
+
         $message = $request->input('message') ?? 'You have not logged into the app for a while now. You are being reminded to log in at least once every week. Thank you.';
         $phoneNumber = $user->phone_number;
         $phoneNumber = (strlen($phoneNumber)===9 || strlen($phoneNumber)===10) ? '233'.ltrim($phoneNumber, 0) : ltrim($phoneNumber, '+');
