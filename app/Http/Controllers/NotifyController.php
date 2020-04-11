@@ -10,7 +10,7 @@ class NotifyController extends Controller
     //
     public function index(Request $request)
     {
-        $message = $request->input('message') ?? 'You have not logged into the app for a while now. You are being reminded to log in at least once every week. Thank you.';
+        $message = $request->input('message') ?? 'You have not logged into the app for a while now. You are being reminded to log in at least once every month. Thank you.';
         $phoneNumber = $request->input('phone_number');
         $phoneNumber = (strlen($phoneNumber)===9 || strlen($phoneNumber)===10) ? '233'.ltrim($phoneNumber, 0) : ltrim($phoneNumber, '+');
         if($message && $phoneNumber) {
@@ -37,7 +37,7 @@ class NotifyController extends Controller
                 echo $error;
                 exit;
             }
-            echo 'Message sent to '.$phoneNumber.' successfully';
+            echo 'Message sent to '.$phoneNumber.' successfully\n';
             //echo 'Message sent to ' . $phoneNumber.' with respose: '.$result.'<br/>';
             curl_close($ch);
         }
